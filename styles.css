@@ -7,28 +7,49 @@ body {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
   direction: rtl;
   text-align: right;
+  scrollbar-width: thin;
+  scrollbar-color: #bfdbfe transparent;
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: #bfdbfe;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #93c5fd;
+}
+
+#drafts-list {
+  scrollbar-width: thin;
+  scrollbar-color: #bfdbfe transparent;
 }
 
 #suggestion-bar {
   scrollbar-width: thin;
+  scrollbar-color: #bfdbfe transparent;
 }
 
-#editor-mirror {
-  position: absolute;
-  top: 0;
-  left: -9999px;
-  visibility: hidden;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  direction: rtl;
+#suggestion-bar::-webkit-scrollbar {
+  height: 6px;
+}
+
+#suggestion-bar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: #bfdbfe;
 }
 
 .loading-spinner {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border: 2px solid #dbeafe;
   border-top-color: #2563eb;
   border-radius: 50%;

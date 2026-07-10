@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" class="h-full">
+<html lang="ar" dir="rtl" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,47 +10,73 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen bg-blue-50 text-slate-800">
-    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 lg:flex-row">
-        <div class="flex-1 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+<body class="min-h-screen bg-gradient-to-br from-blue-5 via-white to-blue-50 text-slate-800">
+    <main class="mx-auto flex max-w-7xl flex-col gap-2 px-4 pb-3 pt-6 lg:flex-row max-h-screen">
+        <div class="min-w-0 flex-1 rounded-sm border border-blue-100 bg-white/90 p-1 shadow-xl shadow-blue-100/60 backdrop-blur p-4">
+            <div class="mb-2 flex flex-wrap items-start justify-between gap-1">
                 <div>
-                    <h1 class="text-2xl font-semibold text-blue-900">محرر الترجمة الصوتية العربية</h1>
-                    <p class="mt-1 text-sm text-slate-600">اكتب كلمات إنجليزية واختر المقترحات العربية. اضغط Ctrl+M لتشغيل أو إيقاف الترجمة الصوتية.</p>
+                    <h1 class="text-2xl font-bold text-blue-950">محرر الترجمة الصوتية العربية</h1>
                 </div>
-                <button id="toggle-btn" type="button" class="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-blue-700"></button>
+                <div class="flex items-center gap-2">
+                    <button id="drafts-toggle" type="button" aria-label="المسودات" class="flex h-11 w-11 items-center justify-center rounded-sm border border-blue-200 bg-blue-50 text-blue-700 transition hover:bg-blue-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    <button id="toggle-btn" type="button" aria-label="تشغيل/إيقاف الترجمة الصوتية (Ctrl+M)" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm text-white shadow-md transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div id="suggestion-bar" dir="rtl" class="mb-3 flex min-h-14 flex-wrap items-center gap-2 rounded-xl border border-blue-100 bg-blue-50 p-3"></div>
+            <label class="block text-sm font-medium text-slate-600">المقترحات</label>
+            <div id="suggestion-bar" class="mb-4 mt-2 flex min-h-14 items-center gap-2 overflow-x-scroll rounded-sm border border-blue-100 bg-blue-50/70 px-3"></div>
 
-            <label class="block text-sm font-medium text-slate-700" for="editor">
+            <label class="block text-sm font-medium text-slate-600" for="editor">
                 المحرر
             </label>
-            <div dir="rtl" class="mt-2 flex overflow-hidden rounded-xl border border-blue-200 bg-white shadow-sm transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-200">
-                <div id="line-numbers" class="w-10 shrink-0 select-none overflow-hidden border-l border-blue-100 bg-blue-50 py-3 text-center text-sm leading-7 text-slate-400"></div>
+            <div class="mt-2 flex h-96 overflow-hidden rounded-sm border border-blue-200 bg-white transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-200">
+                <div id="line-numbers" class="w-10 shrink-0 select-none overflow-hidden border-l border-blue-100 bg-blue-50/80 py-3 text-center text-sm leading-7 text-blue-300"></div>
                 <textarea
                     id="editor"
-                    rows="14"
+                    wrap="off"
                     placeholder="ابدأ الكتابة هنا..."
-                    class="w-full flex-1 bg-transparent px-4 py-3 text-lg outline-none"
+                    class="h-full w-full flex-1 bg-transparent px-4 py-3 text-lg leading-7 outline-none"
                 ></textarea>
             </div>
-            <div id="editor-mirror" aria-hidden="true"></div>
         </div>
 
-    </div>
+        <aside id="drafts-sidebar" class="flex w-full flex-col rounded-sm border border-blue-100 bg-white/90 p-5 shadow-xl shadow-blue-100/60 backdrop-blur lg:w-72 lg:shrink-0">
+            <div class="flex items-center justify-between gap-3">
+                <h2 class="text-lg font-bold text-blue-950">المسودات</h2>
+                <button id="new-draft-btn" type="button" aria-label="مسودة جديدة" class="flex h-9 w-9 items-center justify-center rounded-sm border border-blue-200 bg-blue-50 text-blue-700 transition hover:bg-blue-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </button>
+            </div>
+            <ul id="drafts-list" class="mt-4 flex-1 space-y-2 overflow-y-auto text-sm lg:max-h-[28rem]"></ul>
+        </aside>
+    </main>
 
-    <button id="cheat-sheet-toggle" type="button" class="fixed bottom-4 left-4 z-40 rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700">?</button>
+    <button id="cheat-sheet-toggle" type="button" aria-label="دليل الكتابة" class="fixed bottom-4 left-4 z-40 flex h-11 w-11 items-center justify-center rounded-sm bg-blue-600 text-white shadow-lg transition hover:bg-blue-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+        </svg>
+    </button>
 
-    <aside id="cheat-sheet" class="fixed bottom-20 left-4 z-40 hidden w-64 rounded-2xl border border-blue-100 bg-white p-5 shadow-xl">
+    <aside id="cheat-sheet" class="fixed bottom-20 left-4 z-40 hidden w-64 rounded-sm border border-blue-100 bg-white p-5 shadow-xl">
         <h2 class="text-lg font-semibold text-blue-900">دليل الكتابة</h2>
         <ul class="mt-4 grid grid-cols-2 gap-2 text-sm">
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">kh</span><span>خ</span></li>
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">sh</span><span>ش</span></li>
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">th</span><span>ث</span></li>
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">dh</span><span>ذ</span></li>
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">3a</span><span>ع</span></li>
-            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">gha</span><span>غ</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">kh</span><span>خ</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">sh</span><span>ش</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">th</span><span>ث</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">dh</span><span>ذ</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">3a</span><span>ع</span></li>
+            <li class="flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">gha</span><span>غ</span></li>
+            <li class="col-span-2 flex items-center justify-between rounded-sm bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">Ctrl+M</span><span>تشغيل/إيقاف الترجمة</span></li>
         </ul>
     </aside>
 
