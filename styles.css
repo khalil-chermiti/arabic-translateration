@@ -1,0 +1,51 @@
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: 'Noto Kufi Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+textarea {
+  resize: vertical;
+  direction: rtl;
+  text-align: right;
+}
+
+#suggestion-bar {
+  scrollbar-width: thin;
+}
+
+#editor-mirror {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  visibility: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  direction: rtl;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #dbeafe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.suggestion-item {
+  transition: all 0.15s ease;
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  transform: translateY(-1px);
+}

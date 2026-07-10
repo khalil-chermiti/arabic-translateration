@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرر الترجمة الصوتية العربية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen bg-blue-50 text-slate-800">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 lg:flex-row">
+        <div class="flex-1 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <h1 class="text-2xl font-semibold text-blue-900">محرر الترجمة الصوتية العربية</h1>
+                    <p class="mt-1 text-sm text-slate-600">اكتب كلمات إنجليزية واختر المقترحات العربية. اضغط Ctrl+M لتشغيل أو إيقاف الترجمة الصوتية.</p>
+                </div>
+                <button id="toggle-btn" type="button" class="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow transition hover:bg-blue-700"></button>
+            </div>
+
+            <div id="suggestion-bar" dir="rtl" class="mb-3 flex min-h-14 flex-wrap items-center gap-2 rounded-xl border border-blue-100 bg-blue-50 p-3"></div>
+
+            <label class="block text-sm font-medium text-slate-700" for="editor">
+                المحرر
+            </label>
+            <div dir="rtl" class="mt-2 flex overflow-hidden rounded-xl border border-blue-200 bg-white shadow-sm transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-200">
+                <div id="line-numbers" class="w-10 shrink-0 select-none overflow-hidden border-l border-blue-100 bg-blue-50 py-3 text-center text-sm leading-7 text-slate-400"></div>
+                <textarea
+                    id="editor"
+                    rows="14"
+                    placeholder="ابدأ الكتابة هنا..."
+                    class="w-full flex-1 bg-transparent px-4 py-3 text-lg outline-none"
+                ></textarea>
+            </div>
+            <div id="editor-mirror" aria-hidden="true"></div>
+        </div>
+
+    </div>
+
+    <button id="cheat-sheet-toggle" type="button" class="fixed bottom-4 left-4 z-40 rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700">?</button>
+
+    <aside id="cheat-sheet" class="fixed bottom-20 left-4 z-40 hidden w-64 rounded-2xl border border-blue-100 bg-white p-5 shadow-xl">
+        <h2 class="text-lg font-semibold text-blue-900">دليل الكتابة</h2>
+        <ul class="mt-4 grid grid-cols-2 gap-2 text-sm">
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">kh</span><span>خ</span></li>
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">sh</span><span>ش</span></li>
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">th</span><span>ث</span></li>
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">dh</span><span>ذ</span></li>
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">3a</span><span>ع</span></li>
+            <li class="flex items-center justify-between rounded-lg bg-blue-50 px-3 py-2"><span class="font-semibold text-blue-700">gha</span><span>غ</span></li>
+        </ul>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
